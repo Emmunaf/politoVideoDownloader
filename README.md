@@ -1,5 +1,13 @@
 # politoVideoDownloader
-A simple python script to download (in bulk) all the video lectures available for a course
+A simple python script to download (in bulk) all the video lectures available for a given course.
+It must be used for **personal use only**.
+
+# Important notice
+All the contents are subjected to Copyright.
+
+The redistribution, sell, editing or any other usage is forbidden without a written authorization.
+
+Any violation will be punished by law.
 
 # Usage
 python3 poliVideoDownload.py

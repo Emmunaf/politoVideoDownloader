@@ -9,17 +9,21 @@ Requirements:
 """
 
 import datetime
+import os
 import sys
 import requests
-from urllib.request import urlretrieve  # Needed for downoad
+from urllib.request import urlretrieve  # Needed for download
 from bs4 import BeautifulSoup 
 from threading import Thread
 from threading import BoundedSemaphore
-import os
-import ssl # To fix certificate issue
+import ssl  # To fix certificate issue
+import warnings  # Same as above
 
+# Configuration
 thread_n = 4
 sync = BoundedSemaphore(thread_n)
+warnings.filterwarnings('ignore', message='Unverified HTTPS request')
+
 
 def hilite(string, status=False, bold=False):
     """If tty highligth the output."""
@@ -46,20 +50,17 @@ def get_links():
     # Start a new session, to preserve the cookie
     global s
     s = requests.session()
-    # Take session 
     video_course_url = input("Insert the url of videolectures:\n");
     t = s.get(video_course_url, verify=False)
     link_list = [];
     #try:
     l_response = s.post(video_course_url)
-    print("Content response")
     if l_response.text.find("argoLink"):
-        print(l_response.text)            
-        soup = BeautifulSoup(l_response.text)
+        #print(l_response.text)            
+        soup = BeautifulSoup(l_response.text, "html.parser")
         video_list = soup.find('ul', {'class': 'lezioni'})
         for video_page_url in video_list.find_all('a'):
             if not 'javascript' in video_page_url.get("href"): 
-                print(video_page_url.get("href")+"\n")
                 link_list.append(base_url + video_page_url.get("href"))
 
     else:
@@ -83,24 +84,26 @@ def download_page(video_page, folder_path):
     sync.acquire()
     #try:
     l_response = s.get(video_page, verify=False)
-    print("Content videopage response")
     if "video-js-box" in l_response.text:
         #print(l_response.text)            
-        soup = BeautifulSoup(l_response.text)
+        soup = BeautifulSoup(l_response.text, "html.parser")
         download_list = soup.find('div', {'id': 'content'})
         for video_relative_url in download_list.find_all('a'):
             if 'video1' in video_relative_url.get("id"):  # video1: video, video2: iphone, video3: audio
+                filename = soup.title.string
                 download_link = base_url + video_relative_url.get("href")
                 ssl._create_default_https_context = ssl._create_unverified_context
-                download_path = folder_path + "/" + soup.title.string + ".mp4";
+                download_path = folder_path + "/" + filename + ".mp4";
                 urlretrieve(download_link, download_path)
+                print(hilite("[+] Lecture downloaded: " + filename, status=True))  
+                
     sync.release()
     
 def main():
     print(hilite("Polito Video Lectures Autodownloader ", status=True))  
-    print(hilite("!!! NOTE: THIS SOFTWARE SHOULD BE USED FOR PERSONAL POURPOSE ONLY !!!", status=True))   
-    print(hilite("**** Redistribution of videolectures can be punished by law ****", status=True))      
-    print("Instructions:\n1) Go to 'Materiale'\n2) Go to 'Materiale Didattico disponibile'\n3) Go to 'Lezioni online'\n4) Click on your section (Primo anno, secondo anno, ..., Magistrale)\n5) Click on your interested course \n6) When the page is loaded, just copy the url from the address bar\n\n")
+    print(hilite("!!! NOTE: THIS SOFTWARE SHOULD BE USED FOR PERSONAL POURPOSE ONLY !!!"))   
+    print(hilite("**** Redistribution of videolectures can be punished by law ****"))      
+    print(hilite("Instructions:\n1) Go to 'Materiale'\n2) Go to 'Materiale Didattico disponibile'\n3) Go to 'Lezioni online'\n4) Click on your section (Primo anno, secondo anno, ..., Magistrale)\n5) Click on your interested course \n6) When the page is loaded, just copy the url from the address bar\n\n", status=True))
     print(hilite("To be sure you can check that the url begins with 'https://elearning.polito.it/gadgets/video/'"))
     global thread_n
     global sync
@@ -113,13 +116,12 @@ def main():
         os.makedirs(folder_path)
     else:
         "Dowloading also if the folder exists already!"
-    
+        
+    print(hilite("Download started: " + str(datetime.date.today()), status=True))    
     for video_page in todownload_list:
         with sync:
             t = Thread(target=download_page, args=(video_page, folder_path))  # Page[0] is the n. of chapter
             t.start()
-
-    print("Download completed: ", str(datetime.date.today()))
 
 main()
 
@@ -154,5 +156,6 @@ TODO:
     choose wich type of video is needed (video, iphone, audio only)
     customization of #thread 
     support the other type of videolectures
+    support syncronization option (download just the missing lectures)
 """
 

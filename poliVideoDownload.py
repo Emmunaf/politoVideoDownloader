@@ -8,16 +8,16 @@ username2:password2
 
 Requirements:
     pip install bs4
-    pip install schedule
+    pip install requests 
 """
 #template_video.php?id_lez=35179&amp;inc=227523&amp;f=1&amp;id_corso=1049&amp;utente=S265060&amp;data=041020190849&amp;token=1c458be4cc1e5f810526bf8022de6620
 """Notes:
-https://elearning.polito.it/gadgets/video/template_video.php?utente=S265060&inc=227523&data=041020190849&token=1C458BE4CC1E5F810526BF8022DE6620
+https://elearning.polito.it/gadgets/video/template_video.php?utente=<matricola>&inc=227523&data=041020190849&token=XXXXXXXXXXXXYYYYYYYZZZZZ
 
 0) base_url for videopage is: base_url = "https://elearning.polito.it/gadgets/video/"
 1) Search for: <ul class="lezioni">
 2) Iterate over <li>
-    <li><a href="template_video.php?id_lez=35050&amp;inc=227523&amp;f=1&amp;id_corso=1049&amp;utente=S265060&amp;data=041020190849&amp;token=1c458be4cc1e5f810526bf8022de6620">2019_Lezione 01</a><br>&nbsp;&nbsp;<span style="font-size:10px;"> del&nbsp;2018-10-01</span></li>
+    <li><a href="template_video.php?id_lez=35050&amp;inc=227523&amp;f=1&amp;id_corso=1049&amp;utente=<matricola>&amp;data=041020190849&amp;token=XXXXXXXXXXXXYYYYYYYZZZZZ">2019_Lezione 01</a><br>&nbsp;&nbsp;<span style="font-size:10px;"> del&nbsp;2018-10-01</span></li>
 
 3) Get href value
 
@@ -134,7 +134,9 @@ def download_page(video_page, folder_path):
     sync.release()
     
 def main():
-    n_of_trying = 3
+    print(hilite("Polito Video Lectures Autodownloader " + username, status=True))  
+    print(hilite("!!! NOTE: THIS SOFTWARE SHOULD BE USED FOR PERSONAL POURPOSE ONLY !!!", status=True))   
+    print(hilite("**** Redistribution of videolectures can be punished by law ****", status=True))       
     global thread_n
     global sync
     # Get login data from file

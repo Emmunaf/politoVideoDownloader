@@ -41,7 +41,7 @@ def hilite(string, status=False, bold=False):
 
 
 def get_links():
-    """Get video page download link.
+    """Get video page download links.
 
     TODO: add filter by name, date, etc
     """
@@ -72,9 +72,8 @@ def get_links():
     return link_list
 
 def download_page(video_page, folder_path):
-    """Get video page download link.
+    """Parse a video page and download the relative video .
 
-    TODO: add filter by name, date, etc
     """
     
     base_url = "https://elearning.polito.it/gadgets/video/"

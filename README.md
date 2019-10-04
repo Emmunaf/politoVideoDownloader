@@ -40,7 +40,7 @@ You can find the downloaded videos in the "videolectures" folder that will be cr
 <details>
   <summary>Real reason</summary>
   
-  Bored during an introduction lecture. 
+  Bored during an introduction lecture :grimacing:. 
 </details>
 
 Other interesting reasons (difference between this and others one already present on the net):
@@ -49,7 +49,7 @@ Other interesting reasons (difference between this and others one already presen
 - Multithreaded download
 - Really easy to read, adjust or customize (1 script ~100 LoC)
 - You can download all the videolectures available for your account, not just the course you are registered right now.
-
+- Awesome green/red colors :alien: !
 # TODOs
 - [ ] Filter by title, date, etc
 - [ ] Choose which type of video is needed (video, iphone, audio only)

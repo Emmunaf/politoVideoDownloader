@@ -50,6 +50,7 @@ Other interesting reasons (difference between this and others one already presen
 - Really easy to read, adjust or customize (1 script ~100 LoC)
 - You can download all the videolectures available for your account, not just the course you are registered right now.
 - Awesome green/red colors :alien: !
+- Multiplatform support (Windows/OS X/Linux)
 # TODOs
 - [ ] Filter by title, date, etc
 - [ ] Choose which type of video is needed (video, iphone, audio only)

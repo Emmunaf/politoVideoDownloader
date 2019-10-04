@@ -14,3 +14,9 @@ python3 poliVideoDownload.py
 For now you can't customize the download location.
 You can find the downloaded videos in the "videolectures" folder that will be created in the current folder (where the script was launched)
 
+# TODOs
+
+- [ ] Filter by title, date, etc
+- [ ] Choose which type of video is needed (video, iphone, audio only)
+- [ ] Customization of #thread (max concurrent downloads)
+- [ ] Support a syncronization option (download just the missing lectures)

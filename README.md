@@ -29,7 +29,7 @@ You can find the downloaded videos in the "videolectures" folder that will be cr
   Bored during an introduction lecture. 
 </details>
 
-Other interesting reason (difference between this and others one already present on the net):
+Other interesting reasons (difference between this and others one already present on the net):
 - No explicit authentication is needed: the script will *not* ask you for username/password.
 - It doesn't use Selenium and you don't need any driver 
 - Multithreaded download

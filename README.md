@@ -6,7 +6,8 @@ python3 poliVideoDownload.py
 
 # How to get the videocourse url?
 - Go to the page named "Materiale" (you can find it in the top bar) and scroll until you get "Materiale disponibile"
-- Follow the istructions in the video http://g.recordit.co/LhSHbHY1lU.gif
+- Follow the istructions in the video
+![](instructions.gif)
 - Copy the url in the address bar and paste it when the software ask for it
 
 # Where will the lectures be saved?

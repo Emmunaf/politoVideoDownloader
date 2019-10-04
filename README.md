@@ -10,7 +10,21 @@ The redistribution, sell, editing or any other usage is forbidden without a writ
 Any violation will be punished by law.
 
 # Usage
+
+You need python 3 with the following module installed:
+- bs4
+```
+pip3 install bs4
+```
+- requests
+```
+pip3 install requests
+```
+
+Clone or download the repo and execute the script:
+```
 python3 poliVideoDownload.py
+```
 
 # How to get the videocourse url?
 - Go to the page named "Materiale" (you can find it in the top bar) and scroll until you get "Materiale disponibile"
@@ -19,7 +33,7 @@ python3 poliVideoDownload.py
 - Copy the url in the address bar and paste it when the software ask for it
 
 # Where will the lectures be saved?
-For now you can't customize the download location.
+at the moment you can't customize the download location.
 You can find the downloaded videos in the "videolectures" folder that will be created in the current folder (where the script was launched)
 
 # Why another downloader for polito videolectures?
